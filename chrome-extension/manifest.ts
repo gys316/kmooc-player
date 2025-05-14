@@ -19,7 +19,7 @@ const packageJson = JSON.parse(readFileSync('./package.json', 'utf8'));
  */
 const manifest = {
   manifest_version: 3,
-  default_locale: 'en',
+  default_locale: 'ko',
   name: '__MSG_extensionName__',
   browser_specific_settings: {
     gecko: {
@@ -30,7 +30,7 @@ const manifest = {
   version: packageJson.version,
   description: '__MSG_extensionDescription__',
   host_permissions: ['<all_urls>'],
-  permissions: ['storage', 'scripting', 'tabs', 'notifications', 'sidePanel'],
+  permissions: ['storage', 'scripting', 'tabs', 'notifications'],
   options_page: 'options/index.html',
   background: {
     service_worker: 'background.js',
@@ -40,23 +40,21 @@ const manifest = {
     default_popup: 'popup/index.html',
     default_icon: 'icon-34.png',
   },
-  chrome_url_overrides: {
-    newtab: 'new-tab/index.html',
-  },
+  chrome_url_overrides: {},
   icons: {
     128: 'icon-128.png',
   },
   content_scripts: [
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: ['https://lms.kmooc.kr/*'],
       js: ['content/index.iife.js'],
     },
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: ['https://lms.kmooc.kr/*'],
       js: ['content-ui/index.iife.js'],
     },
     {
-      matches: ['http://*/*', 'https://*/*', '<all_urls>'],
+      matches: ['https://lms.kmooc.kr/*'],
       css: ['content.css'],
     },
   ],
@@ -67,9 +65,6 @@ const manifest = {
       matches: ['*://*/*'],
     },
   ],
-  side_panel: {
-    default_path: 'side-panel/index.html',
-  },
 } satisfies chrome.runtime.ManifestV3;
 
 export default manifest;
